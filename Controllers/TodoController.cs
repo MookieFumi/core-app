@@ -1,28 +1,26 @@
 using System.Collections.Generic;
-using ConsoleApplication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace TodoApi.Controllers
+namespace CoreApp.Api.Controllers
 {
     [Route("api/[controller]")]
     public class TodoController : Controller
     {
         private readonly ILogger<TodoController> _logger;
-        private readonly IOptions<AuthorInfo> _authorInfo;
+
         public TodoController(IOptions<AuthorInfo> authorInfo, ILogger<TodoController> logger)
         {
             _logger = logger;
-            _authorInfo = authorInfo;
-            _logger.LogInformation(1, _authorInfo.Value.PoweredBy);
+            _logger.LogInformation(1, authorInfo.Value.PoweredBy);
         }
 
         [HttpGet]
         public IEnumerable<int> GetAll()
         {
             _logger.LogInformation(1, "Listing all items");
-            return new List<int>() { 1, 2 };
+            return new List<int> {1, 2};
         }
 
         [HttpGet("{id}", Name = "GetTodo")]

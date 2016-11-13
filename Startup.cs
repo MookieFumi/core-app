@@ -1,20 +1,15 @@
+using CoreApp.Api.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace ConsoleApplication
+namespace CoreApp
 {
-    public class AuthorInfo{
-        public string PoweredBy { get; set; }
-    }
-
     //Startup class provides the entry point for an application,
     public class Startup
     {
-        public IConfigurationRoot Configuration { get; set; }
-
         public Startup(IHostingEnvironment env)
         {
             // Set up configuration sources.
@@ -23,11 +18,13 @@ namespace ConsoleApplication
                 .AddJsonFile("appsettings.json");
             Configuration = builder.Build();
         }
-        
+
+        public IConfigurationRoot Configuration { get; set; }
+
         //defines the services used by your app (such as the ASP.NET MVC Core framework, Entity Framework Core, Identity, etc.)
         public void ConfigureServices(IServiceCollection services)
         {
-             // Setup options with DI
+            // Setup options with DI
             services.AddOptions();
 
             // Configure MyOptions using config by installing Microsoft.Extensions.Options.ConfigurationExtensions
